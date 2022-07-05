@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>countrylimits</name>
+	<displayName><![CDATA[Country limits]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Country limitation for product selling]]></description>
+	<author><![CDATA[Alan Reibel]]></author>
+	<tab><![CDATA[i18n_localization]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>0</need_instance>
+</module>
