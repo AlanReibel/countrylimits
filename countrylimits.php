@@ -117,21 +117,24 @@ class countrylimits extends Module
         $product_id = $params["id_product"];
         $oldCountries = $this->getCountries($product_id);
         $newCountries = Tools::getValue('countries');
-        if($newCountries)
+        if($oldCountries && $newCountries)
         {
-            if($oldCountries)
+            $diff = array_intersect($newCountries, $oldCountries);
+            if($diff)
             {
-                $diff = array_intersect($newCountries, $oldCountries);
-                if($diff)
-                {
-                    $this->updateCountries($newCountries, $product_id);
-                }
-                
+                $this->updateCountries($newCountries, $product_id);
             }
-            else
-            {
-                $this->saveCountries($newCountries, $product_id);
-            }
+            
+        }
+
+        if($newCountries && !$oldCountries)
+        {
+            $this->saveCountries($newCountries, $product_id);
+        }
+
+        if(!$newCountries & $oldCountries)
+        {
+            $this->deleteCountries($product_id);
         }
 
 
@@ -181,6 +184,12 @@ class countrylimits extends Module
         return $countries;
     }
 
+    public function deleteCountries($product_id)
+    {
+        $query = 'DELETE FROM `'. _DB_PREFIX_ .'countrylimits` WHERE product_id='.$product_id;
+        $result = Db::getInstance()->execute($query);
+
+    }
 
 }
 
